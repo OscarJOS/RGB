@@ -1,22 +1,36 @@
-var correct = Math.floor(Math.random() * 2);
+var correct;
+var score = 0;
+// Inicializa el juego
+game();
 
-$('.option').on('click', function () {
-  var index = $('.option').index(this);
-  if (index == correct) {
-    alert("Muy bien!!!");
-  } else {
-    alert("Mul mal!");
-  }
-});
+// enlaza el click de los circulos a la función guess
+$('.option').on('click', guess);
 
-$('.option').each(function(index) {
-  var color = generateColor();
-  $(this).css("background-color", color);
+function game() {
+  correct = Math.floor(Math.random() * 2);
 
-  if (index == correct) {
-    $('.question').text(color);
-  }
-});
+  $('.option').each(function(index) {
+    var color = generateColor();
+    $(this).css("background-color", color);
+
+    if (index == correct) {
+      $('.question').text(color);
+    }
+  });
+}
+
+function guess() {
+    var index = $('.option').index(this);
+    if (index == correct) {
+      alert("Muy bien!!!");
+      score++;
+    } else {
+      alert("Muy mal!");
+      score = 0;
+    }
+    $('.score span').text(score);
+    game();
+}
 
 function generateColor() {
   return 'rgb(' + ramdom() + ', ' + ramdom() + ', ' + ramdom() + ')';
