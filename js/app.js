@@ -20,16 +20,18 @@ function game() {
 }
 
 function guess() {
-    var index = $('.option').index(this);
-    if (index == correct) {
-      alert("Muy bien!!!");
-      score++;
-    } else {
-      alert("Muy mal!");
-      score = 0;
-    }
-    $('.score span').text(score);
-    game();
+  $(this).addClass('scale');
+
+  var index = $('.option').index(this);
+  if (index == correct) {
+    $('.result.won').show();
+    score++;
+  } else {
+    $('.result.lost').show();
+    score = 0;
+  }
+  $('.score span').text(score);
+  game();
 }
 
 function generateColor() {
